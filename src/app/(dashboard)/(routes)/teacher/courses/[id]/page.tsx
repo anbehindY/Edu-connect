@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs";
 import { LayoutDashboard } from "lucide-react";
 import { redirect } from "next/navigation";
 import TitleForm from "./_components/TitleForm";
+import DescriptionForm from "./_components/DescriptionForm";
 
 const CourseDetail = async ({
   params
@@ -21,6 +22,7 @@ const CourseDetail = async ({
       userId
     }
   });
+
   if (!course) redirect("/");
 
   const requiredFields = [
@@ -49,6 +51,7 @@ const CourseDetail = async ({
             <h2 className="text-xl">Customize your course</h2>
           </div>
           <TitleForm courseData={course} courseId={params.id} />
+          <DescriptionForm courseData={course} courseId={params.id} />
         </div>
       </div>
     </div>
