@@ -5,6 +5,7 @@ import { LayoutDashboard } from "lucide-react";
 import { redirect } from "next/navigation";
 import TitleForm from "./_components/TitleForm";
 import DescriptionForm from "./_components/DescriptionForm";
+import ImageForm from "./_components/ImageForm";
 
 const CourseDetail = async ({
   params
@@ -39,8 +40,8 @@ const CourseDetail = async ({
   const completionIndicator = `(${completedFields}/${totalFields})`
 
   return (
-    <div className="p-6">
-      <div className="flex justify-center items-center flex-col">
+    <div className="px-8 py-10">
+      <div className="flex justify-center items-start flex-col">
         <h1 className="text-3xl font-semibold mb-4">Course Setup</h1>
         <span className="text-sm text-slate-700">Complete all fields {completionIndicator}</span>
       </div>
@@ -52,6 +53,7 @@ const CourseDetail = async ({
           </div>
           <TitleForm courseData={course} courseId={params.id} />
           <DescriptionForm courseData={course} courseId={params.id} />
+          <ImageForm courseData={course} courseId={params.id} />
         </div>
       </div>
     </div>

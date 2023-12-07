@@ -17,15 +17,14 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Textarea } from '@/components/ui/textarea';
+import { Course } from '@prisma/client';
 
 const formSchema = z.object({
   description: z.string().min(1, 'Description is required'),
 });
 
 interface DescriptionFormProps {
-  courseData: {
-    description: string | null;
-  };
+  courseData: Course;
   courseId: string;
 }
 
@@ -38,7 +37,7 @@ const DescriptionForm = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: courseData.description || '',
+      description: courseData?.description || '',
     },
   });
 
