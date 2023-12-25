@@ -16,7 +16,6 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { Textarea } from '@/components/ui/textarea';
 import { Course } from '@prisma/client';
 import { Input } from '@/components/ui/input';
 import priceFormatter from '@/lib/priceFormatter';
