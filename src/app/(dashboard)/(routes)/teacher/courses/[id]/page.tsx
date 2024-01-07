@@ -9,6 +9,7 @@ import ImageForm from "./_components/ImageForm";
 import CategoryForm from "./_components/CategoryForm";
 import PriceForm from "./_components/PriceForm";
 import AttachmentForm from "./_components/AttachmentForm";
+import ChapterForm from "./_components/ChapterForm";
 
 const CourseDetail = async ({
   params
@@ -23,8 +24,14 @@ const CourseDetail = async ({
   const course = await db.course.findFirst({
     where: {
       id: params.id,
+      userId,
     },
     include: {
+      chapters: {
+        orderBy: {
+          position: "asc",
+        },
+      },
       attachments: {
         orderBy: {
           createdAT: "desc",
@@ -39,7 +46,6 @@ const CourseDetail = async ({
     }
   })
 
-  console.log(categories)
   if (!course) redirect("/");
 
   const requiredFields = [
@@ -48,6 +54,7 @@ const CourseDetail = async ({
     course.imageUrl,
     course.price,
     course.categoryId,
+    course.chapters.some(chapter => chapter.isPublic)
   ]
 
   const totalFields = requiredFields.length;
@@ -87,9 +94,7 @@ const CourseDetail = async ({
               <IconBadge icon={ListChecks} />
               <h2 className="text-xl">Course Chapters</h2>
             </div>
-            <div>
-              TODO: Chapters
-            </div>
+            <ChapterForm  courseData={course} courseId={params.id} />
           </div>
           <div>
             <div className="flex items-center gap-x-2">

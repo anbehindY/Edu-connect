@@ -104,11 +104,9 @@ model Purchase {
   userId    String
   courseId  String
   course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  price     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId])
   @@index([courseId])
 }
 
